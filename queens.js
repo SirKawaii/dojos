@@ -1,5 +1,5 @@
 function readline() {
-    return ["(2,1)", "(4,3)", "(6,3)", "(8,4)", "(3,4)", "(1,6)", "(7,7)", "(5,8)","(5,4)"];
+    return ["(2,1)", "(4,3)", "(6,3)", "(8,4)", "(3,4)", "(1,6)", "(7,7)", "(5,8)","(5,4)","(2,5)"];
 }
 
 
@@ -14,7 +14,7 @@ function EightQueens(strArr) {
         //console.log("Actual Queen : "+actualQueen(queen));
         let actualqueen = queenPosition(queen);
 
-        for(let j = i+1; j < strArr.length - 1 ; j++){
+        for(let j = i+1; j < strArr.length ; j++){
             let victim = queenPosition(queens[j]);
             range (actualqueen,victim);
         }
@@ -34,27 +34,32 @@ function queenPosition(queen){
 
 
 function range(q,victim){
-    //console.log(q +" - "+ v);
+    console.log(q +" - "+ victim);
+    let i,j;
 
-    //FIRST ATACK!
-    for(let x = q[0] ; x < 8 ; x++){
-    
-        for(let y = q[1] ; x < 8 ; y++){
-            let beam = [x,y] ;
-            if( beam === victim){          
-                console.log("beam:" +beam+" as equal to "+v);
+    if(q[0] === q[1]){
+        i=0;
+        j=0;
+
+    }else{
+        if(q[0] <= q[1]){
+            i = 0;
+            j = Math.abs(q[0] - q[1]);
+        }else{
+            j = 0;
+            i = Math.abs(q[1] - q[0]);
+        }
+    }
+    do {
+            let beam = [i.toString(),j.toString()];
+            
+            console.log("("+q[0]+"-"+q[1]+";) ->atack in : ("+i+";"+j+")" );
+            if(beam == victim){
+                console.log("dead");
             }
-        }
-    }
-
-    //sECOND ATAFCK!
-
-    for(let y = q[1] ; y < 8 ; y++){
-        let beam = [y,y] ;
-        if( beam === victim){          
-            console.log("beam:" +beam+" as equal to "+v);
-        }
-    }
+            i++;
+            j++;
+    } while (i < 8 || j < 8);
 }
 
 
