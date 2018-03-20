@@ -1,5 +1,5 @@
 function readline() {
-    return ["(2,1)", "(4,3)", "(6,3)", "(8,4)", "(3,4)", "(1,6)", "(7,7)", "(5,8)","(5,4)","(2,5)"];
+    return ["(2,1)", "(4,3)", "(6,3)", "(8,4)", "(3,4)", "(1,6)", "(7,7)", "(5,8)","(5,4)","(1,2)"];
 }
 
 
@@ -16,7 +16,8 @@ function EightQueens(strArr) {
 
         for(let j = i+1; j < strArr.length ; j++){
             let victim = queenPosition(queens[j]);
-            range (actualqueen,victim);
+            //range (actualqueen,victim);
+            oppositeDiagonalAtack(actualqueen,victim)
         }
     }
   return strArr;
@@ -51,18 +52,59 @@ function range(q,victim){
         }
     }
     do {
-            let beam = [i.toString(),j.toString()];
-            
-            console.log("("+q[0]+"-"+q[1]+";) ->atack in : ("+i+";"+j+")" );
-            if(beam == victim){
-                console.log("dead");
+            let beam = [i,j]
+                     
+            if(areEquals(beam, victim)){
+                console.log("("+q[0]+"-"+q[1]+";) ->atack in : ("+i+";"+j+")" );
             }
             i++;
             j++;
     } while (i < 8 || j < 8);
 }
 
+function oppositeDiagonalAtack(q, victim){
+    console.log(q +" - "+ victim);
+    let i,j;
 
+    if(q[0] === q[1]){
+        i=0;
+        j=7;
+
+    }else{
+            i = 0;
+            j = Math.abs(q[1] - q[0]);
+    }
+    do {
+        console.log("("+q[0]+"-"+q[1]+";) ->atack in : ("+i+";"+j+")" );
+            let beam = [i,j]                    
+            if(areEquals(beam, victim)){
+                console.log("("+q[0]+"-"+q[1]+";) ->atacking to ("+victim[0]+" - "+ victim[1]+") in : ("+i+";"+j+")" );
+            }
+            i++;
+            j--;
+    } while (i < 8 && j >= 0);
+}
+
+function areEquals(A,B){
+    let xIsTrue = false;
+    let yIsTrue = false;
+
+    if(A[0] == B[0]){
+        xIsTrue = true;
+    }
+
+    if(A[1] == B[1]){
+        yIsTrue = true;
+    }
+
+    if(xIsTrue && yIsTrue){
+        return true;
+    }
+    else{
+        return false;s
+    }
+
+}
    
 // keep this function call here 
 EightQueens(readline());   
