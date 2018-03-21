@@ -35,14 +35,10 @@ function queenPosition(queen){
     return position;
 }
 
-
-
 function diagonalBeam(q,victim){
     //console.log(q +" - "+ victim);
     let i = q[0];
     let j = q[1];
-    
-
     while (i>0 && j>0) {
         i--;
         j--; 
