@@ -1,5 +1,5 @@
 function readline() {
-    return ["(2,1)", "(4,3)", "(6,3)", "(8,4)", "(3,4)", "(1,6)", "(7,7)", "(5,8)","(5,4)","(1,2)"];
+    return ["(2,1)", "(4,2)", "(6,3)", "(8,4)", "(3,5)", "(1,6)", "(7,7)", "(5,8)"];
 }
 
 
@@ -16,11 +16,14 @@ function EightQueens(strArr) {
 
         for(let j = i+1; j < strArr.length ; j++){
             let victim = queenPosition(queens[j]);
-            //range (actualqueen,victim);
-            oppositeDiagonalAtack(actualqueen,victim)
-        }
+            diagonalBeam(actualqueen,victim);
+            inverseDiagonalBeam(actualqueen,victim);
+            horizontalBeam(actualqueen,victim);
+            verticallBeam(actualqueen,victim);
+        }      
     }
-  return strArr;
+    //render(queens);
+    //return strArr;
 }
 
 
@@ -34,55 +37,68 @@ function queenPosition(queen){
 
 
 
-function range(q,victim){
-    console.log(q +" - "+ victim);
-    let i,j;
+function diagonalBeam(q,victim){
+    //console.log(q +" - "+ victim);
+    let i = q[0];
+    let j = q[1];
+    
 
-    if(q[0] === q[1]){
-        i=0;
-        j=0;
-
-    }else{
-        if(q[0] <= q[1]){
-            i = 0;
-            j = Math.abs(q[0] - q[1]);
-        }else{
-            j = 0;
-            i = Math.abs(q[1] - q[0]);
-        }
+    while (i>0 && j>0) {
+        i--;
+        j--; 
     }
     do {
-            let beam = [i,j]
-                     
+            let beam = [i,j]       
             if(areEquals(beam, victim)){
-                console.log("("+q[0]+"-"+q[1]+";) ->atack in : ("+i+";"+j+")" );
+                console.log("Diagonal Beam: "+q+" ->atack to "+victim+" : ("+i+";"+j+")" );
             }
             i++;
             j++;
     } while (i < 8 || j < 8);
 }
 
-function oppositeDiagonalAtack(q, victim){
-    console.log(q +" - "+ victim);
-    let i,j;
+function inverseDiagonalBeam(q, victim){
+    //console.log(q +" - "+ victim);
+    let i = q[0];
+    let j = q[1];
 
-    if(q[0] === q[1]){
-        i=0;
-        j=7;
-
-    }else{
-            i = 0;
-            j = Math.abs(q[1] - q[0]);
+    while (i>0 && j<8) {
+        i--;
+        j++; 
     }
     do {
-        console.log("("+q[0]+"-"+q[1]+";) ->atack in : ("+i+";"+j+")" );
+        //console.log("("+q[0]+"-"+q[1]+";) ->atack in : ("+i+";"+j+")" );
             let beam = [i,j]                    
             if(areEquals(beam, victim)){
-                console.log("("+q[0]+"-"+q[1]+";) ->atacking to ("+victim[0]+" - "+ victim[1]+") in : ("+i+";"+j+")" );
+                console.log("inverse Diagonal Beam: "+q+" ->atack to "+victim+" : ("+i+";"+j+")" );
             }
             i++;
             j--;
     } while (i < 8 && j >= 0);
+}
+
+function horizontalBeam(q, victim){
+    let i = 0;
+    let j = q[1];
+    do {
+            let beam = [i,j]                    
+            if(areEquals(beam, victim)){
+                console.log("horizontal beam: "+q+" ->atack to "+victim+" : ("+i+";"+j+")" );
+            }
+            i++;
+    } while (i<8);
+}
+
+function verticallBeam(q, victim){
+    let i = q[0];
+    let j = 0;
+    do {
+            let beam = [i,j]                    
+            if(areEquals(beam, victim)){
+                console.log("vertical beam: "+q+" ->atack to "+victim+" : ("+i+";"+j+")" );
+            }
+            j++;
+    } while (j<8);
 }
 
 function areEquals(A,B){
@@ -104,6 +120,11 @@ function areEquals(A,B){
         return false;s
     }
 
+}
+
+function render(table){
+    let line = "";
+    let batleground =  Array(9).fill(Array(9));
 }
    
 // keep this function call here 
