@@ -1,5 +1,5 @@
 function readline() {
-    return ["(2,1)", "(4,2)", "(6,3)", "(8,4)", "(3,5)", "(1,6)", "(7,7)", "(5,8)"];
+    return ["(2,1)", "(4,2)", "(6,3)", "(8,4)", "(3,5)", "(1,6)", "(7,7)", "(5,8)","3,2"];
 }
 
 
@@ -116,11 +116,6 @@ function areEquals(A,B){
         return false;s
     }
 
-}
-
-function render(table){
-    let line = "";
-    let batleground =  Array(9).fill(Array(9));
 }
    
 // keep this function call here 
