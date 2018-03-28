@@ -37,13 +37,15 @@ function queenPosition(queen){
 
 function diagonalBeam(q,victim){
     //console.log(q +" - "+ victim);
-    let i = q[0];
-    let j = q[1];
-    while (i>0 && j>0) {
-        i--;
-        j--; 
-    }
-    do {
+    // let i = q[0];
+    // let j = q[1];
+    // while (i>0 && j>0) {
+    //     i--;
+    //     j--; 
+    // }
+    let i = q[0] - min(q[0],q[1]) -1;
+    let j = q[1] - min(q[0],q[1]) -1;
+     do {
             let beam = [i,j]       
             if(areEquals(beam, victim)){
                 console.log("Diagonal Beam: "+q+" ->atack to "+victim+" : ("+i+";"+j+")" );
@@ -55,13 +57,17 @@ function diagonalBeam(q,victim){
 
 function inverseDiagonalBeam(q, victim){
     //console.log(q +" - "+ victim);
-    let i = q[0];
-    let j = q[1];
+    // let i = q[0];
+    // let j = q[1];
 
-    while (i>0 && j<8) {
-        i--;
-        j++; 
-    }
+    // while (i>0 && j<8) {
+    //     i--;
+    //     j++; 
+    // }
+
+    let i = q[0] - (8-1 -min(q[0],q[1]));
+    let j = q[1] + (8-1 -min(q[0],q[1]));
+
     do {
         //console.log("("+q[0]+"-"+q[1]+";) ->atack in : ("+i+";"+j+")" );
             let beam = [i,j]                    
@@ -116,6 +122,14 @@ function areEquals(A,B){
         return false;s
     }
 
+}
+
+function min(x,y){
+    if(x<y){
+        return x
+    }else{
+        return y
+    }
 }
    
 // keep this function call here 
